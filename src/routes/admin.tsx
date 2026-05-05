@@ -200,6 +200,14 @@ function OrdersAdmin() {
     toast.success("Marked as delivered");
   };
 
+  const delOrder = (id: string) => {
+    if (confirm("Delete this delivered order?")) {
+      ordersStore.remove(id);
+      refresh();
+      toast.success("Order deleted");
+    }
+  };
+
   if (orders.length === 0) {
     return <div className="bg-card border rounded-xl p-12 text-center text-muted-foreground">No orders yet.</div>;
   }
@@ -224,11 +232,18 @@ function OrdersAdmin() {
                 Deliver by: {format(new Date(o.deliveryDate), "PPP")} · Ordered {format(new Date(o.createdAt), "PP")}
               </p>
             </div>
-            {!o.delivered && (
-              <Button size="sm" onClick={() => markDone(o.id)}>
-                <CheckCircle2 className="h-4 w-4 mr-2" />Mark Delivered
-              </Button>
-            )}
+            <div className="flex gap-2">
+              {!o.delivered && (
+                <Button size="sm" onClick={() => markDone(o.id)}>
+                  <CheckCircle2 className="h-4 w-4 mr-2" />Mark Delivered
+                </Button>
+              )}
+              {o.delivered && (
+                <Button size="sm" variant="destructive" onClick={() => delOrder(o.id)}>
+                  <Trash2 className="h-4 w-4 mr-2" />Delete
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       ))}
