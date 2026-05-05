@@ -200,6 +200,14 @@ function OrdersAdmin() {
     toast.success("Marked as delivered");
   };
 
+  const delOrder = (id: string) => {
+    if (confirm("Delete this delivered order?")) {
+      ordersStore.remove(id);
+      refresh();
+      toast.success("Order deleted");
+    }
+  };
+
   if (orders.length === 0) {
     return <div className="bg-card border rounded-xl p-12 text-center text-muted-foreground">No orders yet.</div>;
   }
