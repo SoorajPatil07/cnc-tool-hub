@@ -54,9 +54,12 @@ function RootComponent() {
     <div className="min-h-screen bg-background flex flex-col">
       <header className="border-b bg-[var(--industrial)] text-[var(--industrial-foreground)]">
         <div className="container mx-auto flex items-center justify-between px-4 py-4">
-          <Link to="/" className="flex items-center gap-2 font-bold text-lg">
-            <Wrench className="h-6 w-6 text-primary" />
-            <span>PrecisionCNC Tools</span>
+          <Link to="/" className="flex items-center gap-3 font-bold">
+            <Wrench className="h-7 w-7 text-primary" />
+            <div className="leading-tight">
+              <div className="text-lg">Arshita Enterprises</div>
+              <div className="text-xs opacity-75 font-normal">CNC Machine Tools</div>
+            </div>
           </Link>
           <nav className="flex gap-1">
             {tabs.map((t) => {
