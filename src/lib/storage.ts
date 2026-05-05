@@ -95,6 +95,12 @@ export const ordersStore = {
     );
     write(KEYS.orders, orders);
   },
+  remove: (id: string) => {
+    write(
+      KEYS.orders,
+      read<Order>(KEYS.orders).filter((o) => o.id !== id),
+    );
+  },
 };
 
 export const ADMIN_PASSWORD = "admin123";
