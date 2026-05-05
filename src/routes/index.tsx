@@ -1,65 +1,21 @@
-import { createFileRoute, Link, Outlet, useLocation } from "@tanstack/react-router";
-import { Wrench } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Package, ShieldCheck, Truck } from "lucide-react";
 
 export const Route = createFileRoute("/")({
-  component: Layout,
+  component: Home,
 });
-
-function Layout() {
-  const location = useLocation();
-  const isRoot = location.pathname === "/";
-
-  const tabs = [
-    { to: "/", label: "Home" },
-    { to: "/order", label: "Place Order" },
-    { to: "/admin", label: "Admin" },
-  ];
-
-  return (
-    <div className="min-h-screen bg-background">
-      <header className="border-b bg-[var(--industrial)] text-[var(--industrial-foreground)]">
-        <div className="container mx-auto flex items-center justify-between px-4 py-4">
-          <Link to="/" className="flex items-center gap-2 font-bold text-lg">
-            <Wrench className="h-6 w-6 text-primary" />
-            <span>PrecisionCNC Tools</span>
-          </Link>
-          <nav className="flex gap-1">
-            {tabs.map((t) => (
-              <Link
-                key={t.to}
-                to={t.to}
-                className="px-4 py-2 rounded-md text-sm font-medium hover:bg-white/10 transition-colors [&.active]:bg-primary"
-                activeOptions={{ exact: true }}
-              >
-                {t.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
-      </header>
-
-      <main className="container mx-auto px-4 py-8">
-        {isRoot ? <Home /> : <Outlet />}
-      </main>
-
-      <footer className="border-t mt-16 py-6 text-center text-sm text-muted-foreground">
-        © {new Date().getFullYear()} PrecisionCNC Tools — Engineered for precision.
-      </footer>
-    </div>
-  );
-}
 
 function Home() {
   return (
-    <section className="py-16 text-center">
-      <div
-        className="rounded-2xl p-12 text-[var(--industrial-foreground)]"
+    <div className="space-y-12">
+      <section
+        className="rounded-2xl p-12 text-[var(--industrial-foreground)] text-center"
         style={{ background: "var(--gradient-hero)", boxShadow: "var(--shadow-tool)" }}
       >
         <h1 className="text-5xl font-bold tracking-tight mb-4">CNC Machine Tools</h1>
         <p className="text-lg max-w-2xl mx-auto opacity-90 mb-8">
           High-precision tooling for industrial machining. Browse our inventory and place
-          your order with custom delivery dates.
+          your order with a custom delivery date.
         </p>
         <Link
           to="/order"
@@ -67,7 +23,21 @@ function Home() {
         >
           Browse & Order Tools
         </Link>
-      </div>
-    </section>
+      </section>
+
+      <section className="grid md:grid-cols-3 gap-6">
+        {[
+          { icon: Package, title: "Quality Inventory", desc: "Carefully curated CNC tools for every job." },
+          { icon: ShieldCheck, title: "Trusted Supplier", desc: "Years of experience supplying precision parts." },
+          { icon: Truck, title: "Scheduled Delivery", desc: "Pick the date that fits your production schedule." },
+        ].map((f) => (
+          <div key={f.title} className="bg-card border rounded-xl p-6 text-center">
+            <f.icon className="h-10 w-10 mx-auto mb-3 text-primary" />
+            <h3 className="font-semibold mb-1">{f.title}</h3>
+            <p className="text-sm text-muted-foreground">{f.desc}</p>
+          </div>
+        ))}
+      </section>
+    </div>
   );
 }
