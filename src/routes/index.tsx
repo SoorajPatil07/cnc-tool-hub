@@ -12,7 +12,8 @@ function Home() {
         className="rounded-2xl p-12 text-[var(--industrial-foreground)] text-center"
         style={{ background: "var(--gradient-hero)", boxShadow: "var(--shadow-tool)" }}
       >
-        <h1 className="text-5xl font-bold tracking-tight mb-4">CNC Machine Tools</h1>
+        <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-2">Arshita Enterprises</h1>
+        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-4 opacity-90">CNC Machine Tools</h2>
         <p className="text-lg max-w-2xl mx-auto opacity-90 mb-8">
           High-precision tooling for industrial machining. Browse our inventory and place
           your order with a custom delivery date.
